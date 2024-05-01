@@ -1,12 +1,12 @@
 import streamlit as st
 import pandas as pd
-import joblib
+import joblib as jl
 
 # Load the pre-trained model
 # Streamlit app
 st.title('Algorthmic Trading Model Prediction')
 
-loaded_model = joblib.load('random_forest_model.pkl')
+loaded_model = jl.load("random_forest_model.pkl")
 
 # Upload CSV file
 uploaded_file = st.file_uploader("Upload CSV file", type=['csv'])
