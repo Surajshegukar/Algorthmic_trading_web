@@ -19,6 +19,6 @@ if uploaded_file is not None:
     new_features = data[['RSI', 'k_percent', 'r_percent', 'Price_Rate_Of_Change', 'MACD', 'On Balance Volume']] 
     
     # # Make predictions
-    predictions = model.predict(new_features)
+    predictions = loaded_model.predict(new_features)
     
     st.write(predictions)
