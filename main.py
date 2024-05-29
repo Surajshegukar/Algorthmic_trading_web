@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib as jl
+import api_call as api
 
 # Load the pre-trained model
 # Streamlit app
@@ -23,13 +24,22 @@ if uploaded_file is not None:
     # # Make predictions
     predictions = loaded_model.predict(new_features)
     
+    
     for i in range(len(predictions)):
-        prediction = predictions[i]
-        if str(prediction) == 1:
-            st.write("Predicted Signal: Buy")
-            st.write("the model is predicting a buy shares at the current price")
-        else:
-            st.write("Predicted Signal : Sell")
-            st.write("the model is predicting a sell shares at the current price")
+        try:
+            prediction = predictions[i]
+            if int(prediction) == 1:
+                st.write(last_row['symbol'].values[i])
+                st.write("Predicted Signal: Buy")
+                st.write("the model is predicting to buy shares at the current price")
+                # api.order(last_row['symbol'].values[i], 1)
+                
+            else:
+                st.write(last_row['symbol'].values[i])
+                st.write("Predicted Signal : Sell")
+                st.write("the model is predicting to sell shares at the current price")
+                # api.sell(last_row['symbol'].values[i], 1)
+        except:
+            st.write("Error in prediction")
         
     
